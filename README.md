@@ -37,5 +37,4 @@ Play locally with all your friends!
 
 <img width="936" height="526" alt="image" src="https://github.com/user-attachments/assets/71a9439b-4902-4cb8-8003-7a4dbae2c389" />
 <img width="936" height="526" alt="image" src="https://github.com/user-attachments/assets/4c0cdfd5-a7b9-4838-b1fe-7548100f4a89" />
-<img width="630" height="528" alt="image" src="https://github.com/user-attachments/assets/5aad4a91-2c97-48ce-81e3-cc49feab6293" />
 <img width="1152" height="648" alt="image" src="https://github.com/user-attachments/assets/953e4fcc-fa3f-4858-8b47-17130056908e" />
