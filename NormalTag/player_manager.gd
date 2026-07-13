@@ -123,5 +123,3 @@ func begin_game():
 	for i in range(get_child_count()-1):
 		get_child(i+1).state = get_child(i+1).STATE.TAG
 	enabled = false
-
-

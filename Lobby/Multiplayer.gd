@@ -37,13 +37,17 @@ func _on_server_disconnected():
 
 
 func handle_input_data() -> bool:
+	# Validate port
 	for i in INPUT_PORT.text:
 		if i not in "0123456789":
 			error_message_label.text = "Port incorrect"
 			return false
+	# Prevent an invisible name
 	if INPUT_NAME.text.strip_edges() == "":
 		error_message_label.text = "Type a name"
 		return false
+		
+	# Set data
 	PlayerManager.ip = INPUT_IP.text
 	PlayerManager.port = int(INPUT_PORT.text)
 	PlayerManager.user_name = INPUT_NAME.text
@@ -65,13 +69,8 @@ func _process(delta):
 	$F1.modulate = colour_picker.color
 	$PlayerCount.text = str(len(PlayerManager.players))
 
-
+# Attempt to connect to game
 func _on_join_pressed():
-	#if PlayerManager.connected:
-		#error_message_label.text = "Already connected"
-		#return
-	
-	
 	if !handle_input_data():
 		return
 	
@@ -81,9 +80,9 @@ func _on_join_pressed():
 
 func _on_infection_pressed():
 	if !button_pressed:
-		error_message_label.text = "One-Client Coming Soon!"
-		#var scene = load("res://NormalTag/ice_map.tscn")
-		#get_tree().change_scene_to_packed(scene)
+		#error_message_label.text = "One-Client Coming Soon!"
+		var scene = load("res://NormalTag/local.tscn")
+		get_tree().change_scene_to_packed(scene)
 		return
 	if !multiplayer.is_server():
 		error_message_label.text = "Only the host can start a game"
@@ -96,9 +95,9 @@ func _on_infection_pressed():
 
 func _on_tag_pressed():
 	if !button_pressed:
-		error_message_label.text = "One-Client Coming Soon!"
-		#var scene = load("res://NormalTag/ice_map.tscn")
-		#get_tree().change_scene_to_packed(scene)
+		#error_message_label.text = "One-Client Coming Soon!"
+		var scene = load("res://NormalTag/local.tscn")
+		get_tree().change_scene_to_packed(scene)
 		return
 	if !multiplayer.is_server():
 		error_message_label.text = "Only the host can start a game"

@@ -8,6 +8,11 @@ extends CharacterBody2D
 @onready var immunity_timer = $ImmunityTimer
 @onready var synchroniser = $MultiplayerSynchronizer
 
+@onready var music_player = $AudioStreamPlayer
+@onready var music_button = $Menu/Control/Music
+@onready var leave_button = $Menu/Control/HBoxContainer/LeaveGame
+@onready var menu = $Menu
+
 const ACCELERATION = 25.0
 const SPEED = 300.0
 const IT_SPEED = SPEED * 1.2
@@ -35,6 +40,9 @@ var owned_by_user = false
 var infection = false
 var tag = false
 
+var local_play = false
+
+
 var sync_pos = Vector2.ZERO
 
 var it = false
@@ -54,7 +62,7 @@ func _ready():
 	velocity.x = SPEED
 	
 	set_controller(str(name).to_int())
-	$AudioStreamPlayer.enabled = false
+	music_player.enabled = false
 
 func set_controller(id):
 	synchroniser.set_multiplayer_authority(int(id))
@@ -93,12 +101,12 @@ func _physics_process(delta):
 		global_position = lerp(global_position, sync_pos, 0.5)
 		return
 
-	# Toggle visibility of menu
+	# Toggle visibility of menu. Menu not allowed in local play
 	if Input.is_action_just_pressed("escape"):
-		$CanvasLayer.visible = !$CanvasLayer.visible
+		menu.visible = !menu.visible and !local_play
 
 	# Make music enabled depend on if the button is toggled 
-	$AudioStreamPlayer.enabled = $CanvasLayer/Control/HBoxContainer/VBoxContainer2/Music.button_pressed 
+	music_player.enabled = music_button.button_pressed 
 	
 	sync_pos = global_position
 
@@ -184,6 +192,3 @@ func update_position(pos):
 # Leave the game
 func _on_leave_game_pressed():
 	multiplayer.multiplayer_peer.close()
-
-func _on_music_pressed():
-	pass # Replace with function body.

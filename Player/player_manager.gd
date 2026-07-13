@@ -1,6 +1,6 @@
 extends Node
 
-@export var player: PackedScene = preload("res://player.tscn")
+@export var player: PackedScene = preload("res://Player/player.tscn")
 
 signal terminated_server
 signal rejection_from_active_lobby
@@ -10,6 +10,7 @@ var players = {}
 var upnp
 var port = 1234
 var ip = "127.0.0.1"
+
 
 # Have we connected to the server/hosted the server?
 var connected = false
