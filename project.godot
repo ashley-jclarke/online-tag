@@ -27,6 +27,10 @@ PlayerManager="*res://Player/player_manager.gd"
 
 window/stretch/mode="viewport"
 
+[gui]
+
+theme/custom_font="uid://dm15wr2c0qgvg"
+
 [input]
 
 2={

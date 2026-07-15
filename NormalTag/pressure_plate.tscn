@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://brb6br2dpql7d"]
+[gd_scene format=3 uid="uid://brb6br2dpql7d"]
 
 [ext_resource type="Script" uid="uid://5muu58lpoo1m" path="res://NormalTag/pressure_plate.gd" id="1_p8xqh"]
 [ext_resource type="Texture2D" uid="uid://yg2p6a3wnnmd" path="res://NormalTag/tag2.png" id="2_h4lhh"]
@@ -20,7 +20,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7tkb0")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }]
@@ -28,16 +28,17 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fcu5w"]
 size = Vector2(26, 8)
 
-[node name="Pressure Plate" type="Area2D"]
+[node name="Pressure Plate" type="Area2D" unique_id=1347157205]
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_p8xqh")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=432149792]
 position = Vector2(0, -16)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_5nq0j")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=85716691]
+visible = false
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_fcu5w")

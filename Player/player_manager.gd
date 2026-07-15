@@ -129,7 +129,7 @@ func host():
 	PlayerManager.send_player_information(PlayerManager.user_name, multiplayer.get_unique_id(), PlayerManager.user_colour)
 	
 	connected = true
-	return "Server started..."
+	return "Server Started!"
 
 # On join game
 func join():
@@ -144,4 +144,4 @@ func join():
 	PlayerManager.send_player_information.rpc_id(1, PlayerManager.user_name, multiplayer.get_unique_id(), PlayerManager.user_colour)
 	
 	connected = true
-	return "Connected"
+	return "Connected!"

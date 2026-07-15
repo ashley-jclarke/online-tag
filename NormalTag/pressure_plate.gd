@@ -5,7 +5,7 @@ signal pressure_plate_unpressed
 
 var pressed = false
 
-func _process(delta):
+func _process(_delta):
 	var player_in = false
 	for body in get_overlapping_bodies():
 		if body.is_in_group("Player"):

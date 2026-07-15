@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var num: Label = $Label
 @onready var timer = $DeleteTimer
 @onready var immunity_timer = $ImmunityTimer
-@onready var synchroniser = $MultiplayerSynchronizer
+@onready var smack_sound = $SmackSound
 
 const ACCELERATION = 25.0
 const SPEED = 300.0
@@ -40,7 +40,6 @@ var elapsed_time = 0
 func _ready():
 	velocity.y = JUMP_VELOCITY * 0.5
 	velocity.x = SPEED
-	$AudioStreamPlayer.enabled = false
 
 	
 func  _process(delta):
@@ -66,10 +65,6 @@ const MAX_JUMPS = 1
 var jumps = MAX_JUMPS
 
 func _physics_process(delta):
-	
-	if Input.is_action_just_pressed("escape"):
-		$CanvasLayer.visible = !$CanvasLayer.visible
-	$AudioStreamPlayer.enabled = $CanvasLayer/Control/HBoxContainer/VBoxContainer2/Music.button_pressed 
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -112,12 +107,13 @@ func _on_delete_timer_timeout():
 
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("Player"):
-		if it and !body.immune:
+		if it and !body.immune and !immune:
 			print("Passed")
 			immunity_timer.start(3)
 			immune = true
-			body.it = true
 			it = false
+			print("NOT IT!")
+			body.tag_player()
 		
 	#if body.is_in_group("Player"):
 		#if not body.immune:
@@ -126,11 +122,10 @@ func _on_area_2d_body_entered(body):
 func _on_immunity_timer_timeout():
 	immune = false
 
-	#it = false
 
-func update_position(pos):
-	global_position = pos
-
-
-func _on_music_pressed():
-	pass # Replace with function body.
+func tag_player():
+	print("Call")
+	# if immune: return
+	smack_sound.play()
+	it = true
+	print("IT!")

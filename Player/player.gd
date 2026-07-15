@@ -9,8 +9,9 @@ extends CharacterBody2D
 @onready var synchroniser = $MultiplayerSynchronizer
 
 @onready var music_player = $AudioStreamPlayer
-@onready var music_button = $Menu/Control/Music
+@onready var music_button = $Menu/Control/HBoxContainer/Music
 @onready var leave_button = $Menu/Control/HBoxContainer/LeaveGame
+@onready var tag_sound = $TagSound
 @onready var menu = $Menu
 
 const ACCELERATION = 25.0
@@ -42,7 +43,6 @@ var tag = false
 
 var local_play = false
 
-
 var sync_pos = Vector2.ZERO
 
 var it = false
@@ -62,7 +62,7 @@ func _ready():
 	velocity.x = SPEED
 	
 	set_controller(str(name).to_int())
-	music_player.enabled = false
+	music_player.playing = !local_play
 
 func set_controller(id):
 	synchroniser.set_multiplayer_authority(int(id))
@@ -127,7 +127,8 @@ func _physics_process(delta):
 	var direction = Input.get_axis(left_button, right_button)
 	if direction:
 		skin.flip_h = direction > 0
-		skin.play("Walking")
+		if it: skin.play("seeker_walking")
+		else:  skin.play("Walking")
 		velocity.x = move_toward(velocity.x, speed*direction, ACCELERATION);
 	else:
 		skin.stop()
@@ -167,6 +168,7 @@ func _on_area_2d_body_entered(body):
 				immune = true
 				immunity_timer.start(3)
 				it = false
+				tag_sound.play()
 		else:
 			if body.single_it and !single_immune:
 				single_it = true
@@ -174,6 +176,7 @@ func _on_area_2d_body_entered(body):
 				body.single_immune = true
 				body.immunity_timer.start(3)
 				print("Recieved the tag" + str(player_number))
+				tag_sound.play()
 		
 	#if body.is_in_group("Player"):
 		#if not body.immune:

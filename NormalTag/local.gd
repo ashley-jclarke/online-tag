@@ -70,7 +70,7 @@ func _process(delta):
 	timer_label.visible = in_game
 	cam.enabled = in_game
 	$LobbyCamera.enabled = !in_game
-	timer_label.text = str(round(game_timer.time_left)) + "s Remaining!"
+	timer_label.text = str(int(round(game_timer.time_left))) + "s Remaining!"
 	
 	players = []
 	for i in range(player_manager.get_child_count() -1):
@@ -182,12 +182,12 @@ func _on_start_box_sugar_body_exited(body):
 		sugar_votes -= 1
 
 
-func _on_tag_body_entered(body):
+func _on_tag_body_entered(_body):
 	for player in players:
 		player.state = player.STATE.TAG
 	begin_game()
 
-func _on_infection_body_entered(body):
+func _on_infection_body_entered(_body):
 	for player in players:
 		player.state = player.STATE.INFECTION
 	begin_game()

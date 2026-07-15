@@ -97,7 +97,7 @@ func _process(delta):
 	# The host controls the timer and the rounds
 	if multiplayer.is_server():
 		if in_game:
-			info.text = str(round(game_timer.time_left)) + "s left"
+			info.text = str(int(round(game_timer.time_left))) + "s left"
 			loser = ""
 			for player in players.get_children():
 				if player.it:
@@ -105,8 +105,8 @@ func _process(delta):
 					break
 		else:
 			if loser != "":
-				info.text = "Loser: " + loser + "\nNew round in" + str(round(game_timer.time_left)) + "s"
-			else:info.text = "New round in" + str(round(game_timer.time_left)) + "s"
+				info.text = "Loser: " + loser + "\nNew round in " + str(int(round(game_timer.time_left))) + "s"
+			else:info.text = "New round in " + str(int(round(game_timer.time_left))) + "s"
 	
 
 func create_player(Player_name, id, colour, it, pos):

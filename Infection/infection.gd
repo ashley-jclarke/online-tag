@@ -62,12 +62,12 @@ func _process(delta):
 					survivor_count += 1
 			if survivor_count == 0:
 				_on_timer_timeout()
-			info.text = "Survivors: " + str(survivor_count) + "\n" + str(round(game_timer.time_left)) + "s left"
+			info.text = "Survivors: " + str(survivor_count) + "\n" + str(int(round(game_timer.time_left))) + "s left"
 		else:
 			if survivor_count > 0:
 				info.text = "Survivors: " + str(survivor_count) + "\n"
 			else: info.text = ""
-			info.text += "New round in " + str(round(game_timer.time_left)) + "s"
+			info.text += "New round in " + str(int(round(game_timer.time_left))) + "s"
 
 	if PlayerManager.player_count() != players.get_child_count():
 		for player in players.get_children():

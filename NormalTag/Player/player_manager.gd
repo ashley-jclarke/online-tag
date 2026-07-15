@@ -66,7 +66,7 @@ var colours = [
 var colour_index = 0
 
 @onready var keyboard = $Keys
-@export var player: PackedScene = load("res://player.tscn")
+@export var player: PackedScene = load("res://NormalTag/Player/player.tscn")
 
 func _ready():
 	for i in range(keyboard.get_child_count()-1):
@@ -86,8 +86,9 @@ func create_new_player(up, left, right):
 	controls[right]["colour"] = new_player.color
 	colour_index += 1
 	add_child(new_player)
+	# new_player.local_play = true
 
-func _process(delta):
+func _process(_delta):
 	for num in range(get_child_count() -1):
 		get_child(num + 1).player_number = str(num + 1)
 	if not enabled:
@@ -119,7 +120,7 @@ func release(keys_to_free):
 
 func begin_game():
 	var index_of_first_it = get_child_count() - 1
-	get_child(index_of_first_it).it = true
+	get_child(index_of_first_it).tag_player()
 	for i in range(get_child_count()-1):
 		get_child(i+1).state = get_child(i+1).STATE.TAG
 	enabled = false
